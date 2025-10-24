@@ -5,7 +5,6 @@ This repository contains all simulation scripts required to reproduce the result
 **“The Incomplete Adaptive Cross Approximation for the Fast Construction of H²-Matrices and Its Application to the Electric Field Integral Equation for Electrically Small Problems”**  
 *Joshua Tetzner, Simon Adrian*  
 
----
 
 ## 1. Overview
 
@@ -14,7 +13,6 @@ All implementations are written in **Julia**, and the workflow is fully script-d
 
 At the top level, a **bash script** is provided that runs all simulations sequentially using 16 threads. The script demonstrates how each simulation can be launched individually from the command line.
 
----
 
 ## 2. Setup
 

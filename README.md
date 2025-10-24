@@ -57,3 +57,56 @@ On Linux, Gmsh can typically be installed via your package manager, e.g.:
 sudo apt install gmsh
 ```
 On Windows, download the precompiled binary from the [website](https://gmsh.info/#Download). 
+
+## 4. Hardware Requirements
+Running all simulations requires a system with at least 200 GB of RAM in the peak, depending on the problem size and number of threads used.
+
+For reproducibility of timing results, use a single thread.
+While multithreading is supported, perfect scaling cannot be expected.
+
+## 5. Running the Simulations
+### 5.1 Run all simulations
+A bash script is provided at the top level to execute all simulations sequentially using 16 threads:
+```bash
+bash runall.sh
+```
+This script runs every simulation in sequence and stores the generated data in the corresponding results directory.
+
+### 5.2 Run individual simulations
+Each subdirectory inside `simulations/ contains a Julia script corresponding to a specific numerical experiment from the paper.
+```julia
+# Fig. 6
+julia --project=. --threads=16 simulations/rectangle/rectanglepivoting.jl
+
+# Fig. 7
+julia --project=. --threads=16 simulations/typhoon/typhoonpivoting.jl
+
+# Fig. 8
+julia --project=. --threads=16 simulations/sphere/spheresweep.jl
+
+# Fig. 9
+julia --project=. --threads=16 simulations/typhoon/typhoonsweep.jl
+
+# Fig. 10
+julia --project=. --threads=16 simulations/sphere/spherefull.jl
+
+# Fig. 11
+julia --project=. --threads=16 simulations/typhoon/typhoonfull.jl
+
+# Fig. 12
+julia --project=. --threads=16 simulations/sphere/spheresweep_lf.jl
+
+# Fig. 13
+julia --project=. --threads=16 simulations/sphere/spherefull_lf.jl
+```
+Fig. 3 and Fig. 4 show the pivots selected in `simulations/rectangle/rectanglepivoting.jl`.
+For Table I the sourcecode of the IACA in [NestedCrossApproximation.jl](https://github.com/JoshuaTetzner/NestedCrossApproximation.jl/blob/paper/IACAforH2-Matrices/src/incompletefactorization/incompleteaca.jl) must me modified to track the time required for the pivoting and for the entiere IACA. 
+
+## 7. Reproducibility Statement
+
+The source code that support the findings of this paper is openly available at [NestedCrossApproximaiton.jl](https://github.com/JoshuaTetzner/NestedCrossApproximation.jl/tree/paper/IACAforH2-Matrices) and Zenodo.
+This is a priliminary version of the NCA implementations, the main branch of the package might have been updated in the meantime. 
+
+
+
+
